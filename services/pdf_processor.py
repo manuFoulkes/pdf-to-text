@@ -20,7 +20,7 @@ class PDFProcessor:
         try:
             images = convert_from_path(
                 pdf_path,
-                dpi = 200,
+                dpi = 300,
                 poppler_path = self.poppler_path
             )
             
