@@ -3,6 +3,8 @@ import sys
 from services.pdf_processor import PDFProcessor
 from services.ocr_service import OCRService
 from services.file_manager import FileManager
+from services.spellchecker_service import SpellCheckerService
+from gui.main_window import run_app
 
 def process_pdf_to_text(pdf_path):
     '''
@@ -21,6 +23,7 @@ def process_pdf_to_text(pdf_path):
         pdf_processor = PDFProcessor()
         ocr_service = OCRService()
         file_manager = FileManager()
+        spellchecker_service = SpellCheckerService()
         
         # Paso 1: Validar el archivo
         print("Validando archivo...")
@@ -38,8 +41,12 @@ def process_pdf_to_text(pdf_path):
         for i, image in enumerate(images, 1):
             print(f"  -> Procesando página {i}/{len(images)}")
             page_text = ocr_service.extract_text_from_pil_image(image)
+            
+            print("Corrigiendo errores de OCR con SpellChecker...")
+            corrected_text = spellchecker_service.correct_text(page_text)
+            
             full_text += f"\n--- PáGINA {i} ---\n"
-            full_text += page_text + "\n"
+            full_text += corrected_text + "\n"
             
         # Paso 4: Guardar resultado
         original_name = os.path.basename(pdf_path)
@@ -53,10 +60,12 @@ def process_pdf_to_text(pdf_path):
         return None
     
 if __name__ == "__main__":
+    run_app()
     # Test manual - reemplaza con la ruta de un PDF de prueba
+    '''
     test_pdf = 'test.pdf' # Cambiar por un PDF real
-    
     if os.path.exists(test_pdf):
         process_pdf_to_text(test_pdf)
     else:
         print("Coloca un PDF llamada 'test.pdf' en la carpeta del proyecto para probar la app")
+    '''
