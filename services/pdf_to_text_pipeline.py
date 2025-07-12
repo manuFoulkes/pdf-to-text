@@ -5,7 +5,7 @@ from services.ocr_service import OCRService
 from services.file_manager import FileManager
 from services.spellchecker_service import SpellCheckerService
 
-def process_pdf_to_text(pdf_path):
+def process_pdf_to_text(pdf_path, on_progress_update=None):
     '''
     Función principal que orquesta todo el proceso de:
     PDF → imágenes → OCR → corrección → archivo de texto
@@ -32,6 +32,7 @@ def process_pdf_to_text(pdf_path):
         # Convertir PDF a imágenes
         print("Convirtiendo PDF a imágenes...")
         images = pdf_processor.pdf_to_images(pdf_path)
+        total =len(images)
         print(f"  -> {len(images)} páginas encontradas")
         
         # Procesar cada página
@@ -47,6 +48,10 @@ def process_pdf_to_text(pdf_path):
             
             full_text += f"\n--- PÁGINA {i} ---\n"
             full_text += corrected_text + "\n"
+            
+            if on_progress_update:
+                percent = int((i / total) * 100)
+                on_progress_update(percent)
             
         # Guardar resultado
         original_name = os.path.basename(pdf_path)

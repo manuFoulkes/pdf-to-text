@@ -4,7 +4,8 @@ import os
 
 class OCRService:
     def __init__(self):
-        pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+        tesseract_path = os.path.join(os.path.dirname(__file__), '..', 'external', 'tesseract', 'tesseract.exe')
+        pytesseract.pytesseract.tesseract_cmd = os.path.abspath(tesseract_path)
         
         self.lang = 'spa+eng'
         

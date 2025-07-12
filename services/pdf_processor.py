@@ -3,7 +3,8 @@ import os
 
 class PDFProcessor:
     def __init__(self):
-        self.poppler_path = r'C:\poppler-windows\poppler-24.08.0\Library\bin'
+        poppler_path = os.path.join(os.path.dirname(__file__), '..', 'external', 'poppler')
+        self.poppler_path = os.path.abspath(poppler_path)
         pass
     
     def pdf_to_images(self, pdf_path):

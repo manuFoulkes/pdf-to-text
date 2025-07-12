@@ -1,12 +1,12 @@
-# Entorno virtual
+# Virtual enviroment
 venv/
 
-# Archivos de Python compilados
+# Compiled python files
 __pycache__/
 *.py[cod]
 *.pyo
 
-# Archivos temporales del sistema operativo
+# SO temp files
 *.log
 *.tmp
 *.bak
@@ -14,11 +14,11 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Archivos de entorno o configuración local
+# Local config or enviroment files
 .env
 *.env
 
-# Archivos generados
+# Generated files
 *.txt
 *.png
 *.jpg
@@ -33,3 +33,14 @@ output/
 # IDEs
 .vscode/
 .idea/
+
+# PyInstaller build artifacts
+build/
+dist/
+*.spec
+
+# Archivos ejecutables
+*.exe
+
+# Copias locales de binarios externos
+external/
